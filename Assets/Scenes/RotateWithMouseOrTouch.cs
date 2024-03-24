@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class RotateWithMouseOrTouch : MonoBehaviour
@@ -53,7 +54,8 @@ public class RotateWithMouseOrTouch : MonoBehaviour
     {
         lastInputPosition = mainCamera.ScreenToWorldPoint(inputPosition);
         RaycastHit2D hit = Physics2D.Raycast(lastInputPosition, Vector2.zero);
-        if (hit.collider != null && hit.collider.gameObject == gameObject)
+       
+        if (hit.collider != null && (hit.collider.gameObject == gameObject || hit.collider.gameObject.GetComponent<TextMeshProUGUI>() != null))
         {
             isRotating = true;
             initialTouchWorldPos = lastInputPosition - (Vector2)transform.position;
