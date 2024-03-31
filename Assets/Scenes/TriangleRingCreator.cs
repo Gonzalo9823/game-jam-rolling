@@ -23,8 +23,18 @@ public class TriangleRingCreator : MonoBehaviour
             triangle.transform.rotation = Quaternion.Euler(0, 0, angle + additionalRotation);
 
             TextMeshProUGUI textComponent = triangle.GetComponentInChildren<TextMeshProUGUI>(true);
-            char randLetter = (char)Random.Range('A', 'Z');
-            textComponent.text = "" + randLetter;
+
+            if (TextManager.availableLetters.Count == 0)
+            {
+                char randLetter = (char)Random.Range('A', 'Z');
+                textComponent.text = "" + randLetter;
+            }
+            else
+            {
+                int randIdx = Random.Range(0, TextManager.availableLetters.Count - 1);
+                textComponent.text = "" + TextManager.availableLetters[randIdx];
+                TextManager.availableLetters.RemoveAt(randIdx);
+            }
         }
 
         trianglePrefab.SetActive(false);
